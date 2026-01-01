@@ -165,42 +165,87 @@
         </div>
     </section>
 
-    <div class="contact-form" data-aos="fade-left">
-                <form action="https://formspree.io/f/xaqnqpzy" method="POST">
+    <section id="contact">
+        <div class="contact-container">
+            
+            <div class="contact-details" data-aos="fade-right">
+                <div class="accent-line" style="margin: 0 0 20px 0;"></div>
+                <h2>Concrétisons votre projet</h2>
+                <p>
+                    Vous avez une vision ? Nous avons l'expertise technique. <br>
+                    Remplissez le formulaire ci-contre, nous analysons votre demande et vous répondons sous 24h.
+                </p>
+                
+                <div class="contact-cards">
+                    <a href="mailto:contact@boostagency.fr" class="info-box">
+                        <div class="info-icon"><i class="fas fa-paper-plane"></i></div>
+                        <div class="info-text">
+                            <h4>Email direct</h4>
+                            <span>contact@boostagency.fr</span>
+                        </div>
+                    </a>
                     
-                    <div class="form-group">
-                        <label class="form-label">Votre Nom</label>
-                        <input type="text" name="nom" class="form-input" placeholder="Ex: Jean Dupont" required>
+                    <a href="tel:0652929875" class="info-box">
+                        <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                        <div class="info-text">
+                            <h4>Téléphone</h4>
+                            <span>06 52 92 98 75</span>
+                        </div>
+                    </a>
+
+                    <div class="info-box no-hover">
+                        <div class="info-icon"><i class="fas fa-check-circle"></i></div>
+                        <div class="info-text">
+                            <h4>Engagement</h4>
+                            <span>Devis gratuit & sans engagement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper" data-aos="fade-left">
+                <form action="https://formspree.io/f/xaqnqpzy" method="POST" class="contact-form">
+                    <h3 style="margin-bottom: 25px; font-size: 1.5rem;">Parlez-nous de votre projet</h3>
+                    
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Nom complet</label>
+                            <input type="text" name="nom" placeholder="Jean Dupont" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email professionnel</label>
+                            <input type="email" name="email" placeholder="jean@societe.com" required>
+                        </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Votre Email</label>
-                        <input type="email" name="email" class="form-input" placeholder="Ex: jean@entreprise.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="type-projet">Type de projet</label>
-                        <select class="form-select" id="type-projet" name="type-projet">
-                            <option value="Site Vitrine">Site Vitrine (dès 595€)</option>
-                            <option value="Site E-Commerce">Site E-Commerce (dès 895€)</option>
-                            <option value="Site Réservation">Site Réservation (dès 895€)</option>
-                            <option value="Solution sur-mesure">Solution sur-mesure</option>
+                        <label>Type de service souhaité</label>
+                        <select name="projet" required>
+                            <option value="" disabled selected>Sélectionnez une option...</option>
+                            <option value="Site Vitrine">Site Vitrine (Présence)</option>
+                            <option value="E-Commerce">Site E-Commerce (Vente)</option>
+                            <option value="Réservation">Site Réservation (Booking)</option>
+                            <option value="Sur Mesure">Solution Complète / Autre</option>
                         </select>
                     </div>
 
                     <div class="form-group">
-                        <label class="form-label">Message</label>
-                        <textarea name="message" class="form-textarea" rows="4" placeholder="Décrivez votre projet..." required></textarea>
+                        <label>Détails du projet</label>
+                        <textarea name="message" rows="4" placeholder="Décrivez vos besoins, vos objectifs ou vos délais..." required></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-fullwidth">
-                        Envoyer ma demande <i class="fas fa-paper-plane paper-plane-icon"></i>
+                        Envoyer ma demande <i class="fas fa-arrow-right paper-plane-icon"></i>
                     </button>
-                    <p style="font-size: 0.8rem; margin-top: 15px; text-align: center; color: #64748b;">
-                        En cliquant, vous acceptez notre politique de confidentialité.
+                    
+                    <p class="form-footer">
+                        <i class="fas fa-shield-alt"></i> Vos données sont sécurisées et restent confidentielles.
                     </p>
                 </form>
             </div>
+
+        </div>
+    </section>
 
     <footer>
         <div style="margin-bottom: 20px;">

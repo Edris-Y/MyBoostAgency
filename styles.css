@@ -235,9 +235,9 @@ footer {
     text-align: center; color: var(--text-muted); font-size: 0.9rem;
 }
 
-/* Taille réduite pour le logo du footer */
+/* TAILLE DU LOGO FOOTER CORRIGÉE ICI */
 .footer-logo {
-    height: 70px;
+    height: 25px; /* <--- Réduit pour être discret et élégant */
     width: auto;
     opacity: 0.8;
     margin-bottom: 20px;
@@ -252,4 +252,162 @@ footer {
     .contact-container { grid-template-columns: 1fr; }
     nav { display: none; }
     .contact-form { padding: 30px; }
+}
+
+/* --- 8. SECTION CONTACT (DESIGN WOW) --- */
+#contact {
+    position: relative;
+    /* Fond sombre avec un léger dégradé bleu subtil */
+    background: radial-gradient(circle at 100% 100%, rgba(37, 99, 235, 0.08), transparent 40%),
+                var(--bg-dark);
+    padding: 100px 6%;
+    overflow: hidden;
+}
+
+.contact-container {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr; /* Le formulaire est un peu plus large */
+    gap: 80px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+/* --- Colonne Gauche (Infos) --- */
+.contact-details h2 { 
+    font-size: 2.5rem; 
+    margin-bottom: 15px; 
+    line-height: 1.2; 
+}
+.contact-details p { 
+    color: var(--text-muted); 
+    margin-bottom: 40px; 
+    font-size: 1.1rem; 
+}
+
+.contact-cards { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 20px; 
+}
+
+.info-box {
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 20px 25px;
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-decoration: none; /* Important pour les liens */
+}
+
+/* Effet au survol des infos */
+.info-box:not(.no-hover):hover {
+    background: rgba(37, 99, 235, 0.1);
+    border-color: var(--primary);
+    transform: translateX(10px);
+}
+
+.info-icon {
+    width: 45px; height: 45px;
+    background: rgba(37, 99, 235, 0.2);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    margin-right: 20px;
+    flex-shrink: 0;
+}
+
+.info-text h4 { font-size: 1rem; color: white; margin-bottom: 2px; }
+.info-text span { font-size: 0.95rem; color: var(--text-muted); }
+
+/* --- Colonne Droite (Formulaire) --- */
+.contact-form-wrapper {
+    position: relative;
+}
+
+/* Lueur bleue derrière le formulaire */
+.contact-form-wrapper::before {
+    content: '';
+    position: absolute;
+    top: -20px; right: -20px; bottom: -20px; left: -20px;
+    background: var(--primary);
+    filter: blur(80px);
+    opacity: 0.15;
+    z-index: 0;
+}
+
+.contact-form {
+    position: relative;
+    background: rgba(20, 22, 28, 0.8); /* Fond semi-transparent */
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px); /* Effet Glass */
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.form-group { margin-bottom: 20px; }
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    margin-bottom: 8px;
+    margin-left: 5px;
+}
+
+/* Styles des champs (Inputs) */
+.contact-form input, 
+.contact-form select, 
+.contact-form textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    transition: 0.3s all;
+}
+
+/* Focus sur les champs (Lueur bleue) */
+.contact-form input:focus, 
+.contact-form select:focus, 
+.contact-form textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
+}
+
+.contact-form textarea { resize: vertical; min-height: 120px; }
+
+.form-footer {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #64748b;
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 992px) {
+    .contact-container { grid-template-columns: 1fr; gap: 50px; }
+    .form-grid { grid-template-columns: 1fr; } /* Inputs l'un sous l'autre sur mobile */
+    .contact-form { padding: 30px 20px; }
+    .contact-details h2 { font-size: 2rem; }
 }
