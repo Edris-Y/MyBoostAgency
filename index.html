@@ -6,10 +6,10 @@
     <title>BoostAgency - Création de Sites Internet & Stratégie</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -176,7 +176,7 @@
                     <div class="info-icon"><i class="fas fa-envelope"></i></div>
                     <div class="info-text">
                         <h4>Email</h4>
-                        <a href="mailto:contact@boostagency.fr">contact@boostagency.fr</a>
+                        <a href="mailto:contact@boostagency.fr">Boostagency32@gmail.com</a>
                     </div>
                 </div>
                 
@@ -198,30 +198,31 @@
             </div>
 
             <div class="contact-form" data-aos="fade-left">
-                <form>
+                <form action="https://formspree.io/f/xaqnqpzy" method="POST">
+                    
                     <div class="form-group">
                         <label class="form-label">Votre Nom</label>
-                        <input type="text" class="form-input" placeholder="Ex: Jean Dupont">
+                        <input type="text" name="nom" class="form-input" placeholder="Ex: Jean Dupont" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Votre Email</label>
-                        <input type="email" class="form-input" placeholder="Ex: jean@entreprise.com">
+                        <input type="email" name="email" class="form-input" placeholder="Ex: jean@entreprise.com" required>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="type-projet">Type de projet</label>
                         <select class="form-select" id="type-projet" name="type-projet">
-                            <option>Site Vitrine (dès 595€)</option>
-                            <option>Site E-Commerce (dès 895€)</option>
-                            <option>Site Réservation (dès 895€)</option>
-                            <option>Solution sur-mesure</option>
+                            <option value="Site Vitrine">Site Vitrine (dès 595€)</option>
+                            <option value="Site E-Commerce">Site E-Commerce (dès 895€)</option>
+                            <option value="Site Réservation">Site Réservation (dès 895€)</option>
+                            <option value="Solution sur-mesure">Solution sur-mesure</option>
                         </select>
                     </div>
 
                     <div class="form-group">
                         <label class="form-label">Message</label>
-                        <textarea class="form-textarea" rows="4" placeholder="Décrivez votre projet..."></textarea>
+                        <textarea name="message" class="form-textarea" rows="4" placeholder="Décrivez votre projet..." required></textarea>
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-fullwidth">
@@ -232,7 +233,6 @@
                     </p>
                 </form>
             </div>
-
         </div>
     </section>
 
