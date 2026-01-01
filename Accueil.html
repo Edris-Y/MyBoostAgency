@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boost Digital - Agence Web Premium</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        /* --- VARIABLES & IDENTITÉ VISUELLE --- */
+        :root {
+            --bg-main: #0f1014;        /* Noir profond */
+            --bg-secondary: #16181d;   /* Noir légèrement plus clair pour les sections alternées */
+            
+            /* Couleurs Accent */
+            --primary-blue: #2563eb;   /* Le bleu électrique vif "Boost" */
+            --primary-glow: rgba(37, 99, 235, 0.5); /* Pour les effets de lueur */
+            
+            /* Texte */
+            --text-white: #ffffff;
+            --text-gray: #a1a1aa;      /* Gris clair premium */
+            
+            /* UI */
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --font-main: 'Inter', sans-serif;
+            
+            /* Glassmorphism (Effet verre) */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
+            --glass-blur: blur(16px);
+        }
+
+        /* --- RESET & GLOBAL --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-white);
+            font-family: var(--font-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-weight: 800; letter-spacing: -0.03em; }
+        a { text-decoration: none; transition: all 0.3s ease; }
+        ul { list-style: none; }
+        section { padding: 120px 6%; position: relative; z-index: 1; }
+
+        /* --- UTILITAIRES WOW --- */
+        .text-gradient {
+            background: linear-gradient(to right, #ffffff, var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+        
+        .highlight { color: var(--primary-blue); }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-header h2 { font-size: 3rem; margin-bottom: 20px; }
+        .section-header p { color: var(--text-gray); font-size: 1.1rem; }
+
+        /* --- BOUTONS MODERNES --- */
+        .btn {
+            padding: 16px 32px;
+            border-radius: 50px; /* Boutons très arrondis "pill shape" */
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary-blue);
+            color: white;
+            box-shadow: 0 10px 20px -10px var(--primary-glow);
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 30px -10px var(--primary-glow);
+            background: #1d4ed8;
+        }
+
+        /* --- HEADER "GLASS" --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 6%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(15, 16, 20, 0.8); /* Fond semi-transparent */
+            backdrop-filter: var(--glass-blur); /* Effet de flou derrière */
+            border-bottom: var(--glass-border);
+        }
+
+        .logo-img { height: 45px; width: auto; display: block; }
+
+        nav ul { display: flex; gap: 40px; align-items: center; }
+        nav a { 
+            font-size: 0.95rem; font-weight: 600; color: var(--text-gray); 
+            position: relative;
+        }
+        nav a:hover, nav a.active { color: var(--text-white); }
+        /* Petit point bleu sous le lien actif au survol */
+        nav a::after {
+            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px; 
+            background: var(--primary-blue); transition: 0.3s;
+        }
+        nav a:hover::after { width: 100%; }
+
+        /* --- HERO SECTION DYNAMIQUE --- */
+        #accueil {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* L'animation de fond "Aurora" */
+        .hero-bg-animation {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%; height: 150%;
+            background: radial-gradient(circle at center, var(--primary-glow) 0%, rgba(0,0,0,0) 50%);
+            opacity: 0.3;
+            filter: blur(80px);
+            animation: pulseAccent 10s infinite alternate;
+            z-index: -1;
+        }
+        @keyframes pulseAccent {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
+            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
+        }
+
+        #accueil h1 {
+            font-size: 4.5rem; /* Très gros titre */
+            line-height: 1.1;
+            margin-bottom: 30px;
+            max-width: 900px;
+        }
+        #accueil p.lead {
+            font-size: 1.25rem;
+            color: var(--text-gray);
+            max-width: 650px;
+            margin-bottom: 50px;
+        }
+
+        /* --- CARDS "GLASSMORPHISM" (Services & Tarifs) --- */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .glass-card {
+            background: var(--glass-bg);
+            border: var(--glass-border);
+            /* backdrop-filter: var(--glass-blur); NOTE: Désactivé sur les cards pour perf mobile, l'effet est simulé par le background */
+            padding: 50px 40px;
+            border-radius: var(--radius-lg);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond au survol */
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Effet de lueur au survol des cartes */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 3px;
+            background: linear-gradient(to right, transparent, var(--primary-blue), transparent);
+            opacity: 0; transition: 0.4s;
+        }
+        .glass-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(37, 99, 235, 0.4);
+            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.5);
+        }
+        .glass-card:hover::before { opacity: 1; }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 30px;
+            display: inline-block;
+            /* Dégradé sur l'icône */
+            background: linear-gradient(to bottom right, var(--text-white), var(--primary-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .glass-card h3 { font-size: 1.5rem; margin-bottom: 20px; }
+        .glass-card p { color: var(--text-gray); }
+
+        /* --- TARIFS PREMIUM --- */
+        #tarifs { background: var(--bg-secondary); } /* Fond alterné */
+        
+        .pricing-card {
+            display: flex; flex-direction: column;
+            text-align: left;
+        }
+        .pricing-header { margin-bottom: 30px; }
+        .price-box { display: flex; align-items: baseline; margin: 20px 0; }
+        .price-currency { font-size: 1.5rem; font-weight: 600; }
+        .price-value { font-size: 4rem; font-weight: 800; line-height: 1; color: var(--text-white); }
+        .price-period { color: var(--text-gray); margin-left: 10px; }
+
+        .pricing-features li {
+            margin-bottom: 15px;
+            color: var(--text-gray);
+            display: flex; align-items: center;
+            font-weight: 500;
+        }
+        .pricing-features li i { 
+            color: var(--primary-blue); margin-right: 12px; font-size: 1.1rem;
+        }
+
+        /* Mise en avant de l'offre populaire */
+        .pricing-card.popular {
+            border-color: var(--primary-blue);
+            background: linear-gradient(to bottom right, rgba(37, 99, 235, 0.1), var(--glass-bg));
+            transform: scale(1.05); /* Un peu plus grande par défaut */
+            box-shadow: 0 0 40px -10px var(--primary-glow);
+            z-index: 2;
+        }
+        .pricing-card.popular:hover {
+            transform: scale(1.08) translateY(-10px);
+        }
+        .popular-badge {
+            position: absolute; top: -15px; right: 30px;
+            background: var(--primary-blue); color: white;
+            padding: 8px 16px; border-radius: 30px;
+            font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;
+            box-shadow: 0 5px 15px -5px var(--primary-glow);
+        }
+
+        /* --- FAQ MODERNE --- */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item {
+            background: var(--glass-bg); border: var(--glass-border);
+            margin-bottom: 20px; border-radius: var(--radius-md);
+            overflow: hidden; transition: 0.3s;
+        }
+        .faq-item[open] { border-color: var(--primary-blue); }
+        .faq-summary {
+            padding: 25px;
+            font-weight: 700; font-size: 1.1rem;
+            cursor: pointer; list-style: none;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .faq-summary::after {
+            content: '\f078'; font-family: 'Font Awesome 6 Free';
+            transition: 0.3s; color: var(--primary-blue);
+        }
+        .faq-item[open] .faq-summary::after { transform: rotate(180deg); }
+        .faq-content {
+            padding: 0 25px 25px 25px;
+            color: var(--text-gray); line-height: 1.7;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding-top: 20px;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-secondary);
+            padding: 80px 6% 30px;
+            text-align: center;
+            border-top: var(--glass-border);
+        }
+        .footer-logo img { height: 50px; opacity: 0.8; margin-bottom: 30px; }
+        .copyright { color: var(--text-gray); font-size: 0.9rem; margin-top: 50px; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            #accueil h1 { font-size: 3rem; }
+            nav { display: none; } /* Menu burger à implémenter pour la prod */
+            .pricing-card.popular { transform: scale(1); }
+            section { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header data-aos="fade-down" data-aos-duration="800">
+        <a href="#accueil" class="logo">
+            <img src="image_0.png" alt="Boost Digital Blanc" class="logo-img">
+        </a>
+        <nav>
+            <ul>
+                <li><a href="#services">Expertise</a></li>
+                <li><a href="#tarifs">Offres</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Démarrer</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="accueil">
+            <div class="hero-bg-animation"></div>
+            
+            <h1 data-aos="fade-up" data-aos-delay="200">
+                Transformez vos visiteurs en <span class="text-gradient">clients fidèles.</span>
+            </h1>
+            <p class="lead" data-aos="fade-up" data-aos-delay="400">
+                Nous créons des expériences digitales ultra-modernes qui allient design d'exception et performance commerciale pour propulser votre marque.
+            </p>
+            <div data-aos="fade-up" data-aos-delay="600" style="display: flex; gap: 20px; justify-content: center;">
+                <a href="#tarifs" class="btn btn-primary">
+                    Voir nos offres <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="services">
+            <div class="section-header" data-aos="fade-up">
+                <h2 class="text-gradient">Notre Expertise</h2>
+                <p>Des solutions digitales taillées pour la croissance, sans compromis sur le design.</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-gem card-icon"></i>
+                    <h3>Design Premium</h3>
+                    <p>Des interfaces épurées, modernes et centrées sur l'utilisateur qui renforcent immédiatement votre crédibilité.</p>
+                </div>
+                <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-bolt card-icon"></i>
+                    <h3>Ultra Performance</h3>
+                    <p>Des sites optimisés pour se charger en un éclair. Google adore ça, vos visiteurs aussi.</p>
+                </div>
+                <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-chart-line card-icon"></i>
+                    <h3>Conversion Focus</h3>
+                    <p>Nous ne faisons pas que du "beau". Nous construisons des machines à générer des leads et des ventes.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="tarifs">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Investissez dans votre <span class="highlight">Succès</span></h2>
+                <p>Des forfaits clairs. Des résultats concrets. Aucun frais caché.</p>
+            </div>
+            
+            <div class="grid-3" style="align-items: center;">
+                <div class="glass-card pricing-card" data-aos="fade-right" data-aos-delay="200">
+                    <div class="pricing-header">
+                        <h3>Starter</h3>
+                        <p class="text-gray">Pour une présence pro immédiate.</p>
+                    </div>
+                    <div class="price-box">
+                        <span class="price-currency">€</span>
+                        <span class="price-value">1490</span>
+                        <span class="price-period">/HT</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Site Vitrine (5 pages)</li>
+                        <li><i class="fas fa-check-circle"></i> Design Responsive Unique</li>
+                        <li><i class="fas fa-check-circle"></i> Optimisation SEO de base</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="background: var(--glass-border); width:100%; margin-top: 30px;">Choisir Starter</a>
+                </div>
+
+                <div class="glass-card pricing-card popular" data-aos="zoom-in">
+                    <div class="popular-badge">RECOMMANDÉ</div>
+                    <div class="pricing-header">
+                        <h3>Business Growth</h3>
+                        <p class="text-gray">L'outil complet pour PME ambitieuse.</p>
+                    </div>
+                    <div class="price-box">
+                        <span class="price-currency">€</span>
+                        <span class="price-value">2990</span>
+                        <span class="price-period">/HT</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Tout du pack Starter</li>
+                        <li><i class="fas fa-check-circle"></i> Jusqu'à 15 pages + Blog</li>
+                        <li><i class="fas fa-check-circle"></i> SEO Avancé & Analytics</li>
+                        <li><i class="fas fa-check-circle"></i> Intégration CRM / Newsletter</li>
+                        <li class="highlight"><i class="fas fa-check-circle"></i> Formation Administration Inclus</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="width:100%; margin-top: 30px;">BOOSTER MON BUSINESS</a>
+                </div>
+
+                <div class="glass-card pricing-card" data-aos="fade-left" data-aos-delay="200">
+                    <div class="pricing-header">
+                        <h3>E-Commerce</h3>
+                        <p class="text-gray">Votre boutique ouverte 24/7.</p>
+                    </div>
+                    <div class="price-box">
+                        <span class="price-currency">Dès €</span>
+                        <span class="price-value">4500</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check-circle"></i> Boutique WooCommerce</li>
+                        <li><i class="fas fa-check-circle"></i> Paiements Sécurisés (Stripe)</li>
+                        <li><i class="fas fa-check-circle"></i> Gestion Stocks & Clients</li>
+                        <li><i class="fas fa-check-circle"></i> Outils Marketing Intégrés</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary" style="background: var(--glass-border); width:100%; margin-top: 30px;">Devis E-Commerce</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq">
+            <div class="section-header" data-aos="fade-up">
+                <h2>Questions Fréquentes</h2>
+            </div>
+            <div class="faq-container" data-aos="fade-up" data-aos-delay="200">
+                <details class="faq-item">
+                    <summary class="faq-summary">Quels sont vos délais de création ?</summary>
+                    <div class="faq-content">
+                        Pour un site vitrine "Business Growth", comptez entre 4 et 6 semaines. Nous privilégions la qualité à la précipitation, en incluant des phases de validation design et de tests.
+                    </div>
+                </details>
+                <details class="faq-item">
+                    <summary class="faq-summary">Suis-je propriétaire de mon site ?</summary>
+                    <div class="faq-content">
+                        <strong class="highlight">Absolument.</strong> Une fois le site payé, il vous appartient à 100%. Pas de location, pas de mauvaise surprise. Vous êtes libre.
+                    </div>
+                </details>
+                 <details class="faq-item">
+                    <summary class="faq-summary">Assurez-vous la maintenance ?</summary>
+                    <div class="faq-content">
+                        Oui. Nous proposons des contrats de maintenance mensuels optionnels pour garantir la sécurité, les mises à jour et les sauvegardes de votre outil de travail.
+                    </div>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-logo" data-aos="fade-up">
+            <img src="image_0.png" alt="Boost Digital Logo Blanc">
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+            <a href="#contact" class="btn btn-primary">Discuter de votre projet</a>
+        </div>
+        <p class="copyright">© 2024 Boost Digital. Agence Web Nouvelle Génération.</p>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Initialise la librairie d'animation au chargement
+        AOS.init({
+            once: true, /* L'animation ne se joue qu'une seule fois */
+            offset: 100, /* Déclenche l'animation 100px avant que l'élément soit visible */
+            easing: 'ease-out-cubic'
+        });
+    </script>
+
+</body>
+</html>
