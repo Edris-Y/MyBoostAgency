@@ -3,476 +3,510 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boost Digital - Agence Web Premium</title>
+    <title>BoostAgency - Création de Sites Internet & Stratégie</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        /* --- VARIABLES & IDENTITÉ VISUELLE --- */
+        /* --- 1. VARIABLES & DESIGN SYSTEM --- */
         :root {
-            --bg-main: #0f1014;        /* Noir profond */
-            --bg-secondary: #16181d;   /* Noir légèrement plus clair pour les sections alternées */
+            /* Couleurs Fond */
+            --bg-dark: #0b0c10;       /* Noir très profond */
+            --bg-card: #14161c;       /* Gris anthracite bleuté */
+            --bg-glass: rgba(20, 22, 28, 0.7);
             
             /* Couleurs Accent */
-            --primary-blue: #2563eb;   /* Le bleu électrique vif "Boost" */
-            --primary-glow: rgba(37, 99, 235, 0.5); /* Pour les effets de lueur */
+            --primary: #2563eb;       /* Bleu électrique */
+            --primary-hover: #1d4ed8;
+            --secondary: #60a5fa;     /* Bleu clair pour les dégradés */
             
-            /* Texte */
+            /* Typographie */
             --text-white: #ffffff;
-            --text-gray: #a1a1aa;      /* Gris clair premium */
+            --text-muted: #94a3b8;
             
-            /* UI */
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --font-main: 'Inter', sans-serif;
-            
-            /* Glassmorphism (Effet verre) */
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: 1px solid rgba(255, 255, 255, 0.08);
-            --glass-blur: blur(16px);
+            /* Effets */
+            --glass-blur: blur(20px);
+            --border-light: 1px solid rgba(255, 255, 255, 0.08);
+            --shadow-glow: 0 0 50px rgba(37, 99, 235, 0.15);
+            --radius: 16px;
         }
 
-        /* --- RESET & GLOBAL --- */
+        /* --- 2. RESET & BASE --- */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
         
         body {
-            background-color: var(--bg-main);
+            background-color: var(--bg-dark);
             color: var(--text-white);
-            font-family: var(--font-main);
+            font-family: 'Inter', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1, h2, h3 { font-weight: 800; letter-spacing: -0.03em; }
-        a { text-decoration: none; transition: all 0.3s ease; }
+        h1, h2, h3 { font-weight: 800; letter-spacing: -0.03em; color: var(--text-white); }
+        p { color: var(--text-muted); margin-bottom: 20px; font-size: 1.05rem; }
+        a { text-decoration: none; transition: 0.3s; }
         ul { list-style: none; }
+        
         section { padding: 120px 6%; position: relative; z-index: 1; }
 
-        /* --- UTILITAIRES WOW --- */
+        /* --- 3. COMPONENTS --- */
+        
+        /* Titres avec dégradé */
         .text-gradient {
-            background: linear-gradient(to right, #ffffff, var(--primary-blue));
+            background: linear-gradient(135deg, #fff 30%, var(--primary) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            display: inline-block;
         }
         
-        .highlight { color: var(--primary-blue); }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 80px;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .section-header { text-align: center; max-width: 800px; margin: 0 auto 80px; }
         .section-header h2 { font-size: 3rem; margin-bottom: 20px; }
-        .section-header p { color: var(--text-gray); font-size: 1.1rem; }
-
-        /* --- BOUTONS MODERNES --- */
-        .btn {
-            padding: 16px 32px;
-            border-radius: 50px; /* Boutons très arrondis "pill shape" */
-            font-weight: 700;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            font-size: 1rem;
+        .accent-line {
+            width: 60px; height: 4px; background: var(--primary);
+            margin: 0 auto 20px auto; border-radius: 2px;
         }
-        
+
+        /* Boutons "Next Gen" */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 14px 32px; border-radius: 50px; font-weight: 600; cursor: pointer; border: none;
+            transition: all 0.3s ease; font-size: 1rem; position: relative; overflow: hidden;
+        }
         .btn-primary {
-            background: var(--primary-blue);
-            color: white;
-            box-shadow: 0 10px 20px -10px var(--primary-glow);
+            background: var(--primary); color: white;
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.5);
         }
         .btn-primary:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 30px -10px var(--primary-glow);
-            background: #1d4ed8;
+            transform: translateY(-3px); box-shadow: 0 15px 35px -5px rgba(37, 99, 235, 0.6);
+            background: var(--primary-hover);
         }
+        .btn-outline {
+            background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white;
+            width: 100%; justify-content: center;
+        }
+        .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.05); }
 
-        /* --- HEADER "GLASS" --- */
+        /* --- 4. NAVBAR PREMIUM --- */
         header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 6%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            background: rgba(15, 16, 20, 0.8); /* Fond semi-transparent */
-            backdrop-filter: var(--glass-blur); /* Effet de flou derrière */
-            border-bottom: var(--glass-border);
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            padding: 20px 6%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(11, 12, 16, 0.8); /* Fond sombre semi-transparent */
+            backdrop-filter: var(--glass-blur); /* Flou derrière la navbar */
+            border-bottom: var(--border-light);
+            transition: 0.3s;
         }
-
-        .logo-img { height: 45px; width: auto; display: block; }
-
-        nav ul { display: flex; gap: 40px; align-items: center; }
-        nav a { 
-            font-size: 0.95rem; font-weight: 600; color: var(--text-gray); 
-            position: relative;
+        
+        .logo { 
+            display: flex; align-items: center;
         }
-        nav a:hover, nav a.active { color: var(--text-white); }
-        /* Petit point bleu sous le lien actif au survol */
+        .logo img { height: 40px; }
+
+        nav ul { display: flex; gap: 35px; align-items: center; }
+        nav a { font-size: 0.95rem; font-weight: 500; color: #cbd5e1; position: relative; }
+        nav a:hover { color: white; }
         nav a::after {
-            content: ''; position: absolute; bottom: -5px; left: 0; width: 0%; height: 2px; 
-            background: var(--primary-blue); transition: 0.3s;
+            content:''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0;
+            background: var(--primary); transition: 0.3s;
         }
         nav a:hover::after { width: 100%; }
 
-        /* --- HERO SECTION DYNAMIQUE --- */
-        #accueil {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* --- 5. HERO SECTION --- */
+        #home {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
             text-align: center;
-            padding-top: 120px;
-            position: relative;
-            overflow: hidden;
+            background: radial-gradient(circle at 50% -20%, rgba(37, 99, 235, 0.2), transparent 60%);
+            padding-top: 100px;
+        }
+        .hero-tag {
+            display: inline-block; padding: 8px 16px; border-radius: 30px;
+            background: rgba(37, 99, 235, 0.1); border: 1px solid rgba(37, 99, 235, 0.3);
+            color: var(--secondary); font-size: 0.85rem; font-weight: 600; margin-bottom: 30px;
+        }
+        #home h1 { font-size: 4.5rem; line-height: 1.1; margin-bottom: 25px; }
+        #home p.lead { 
+            font-size: 1.25rem; max-width: 650px; margin: 0 auto 40px; color: var(--text-muted); 
         }
 
-        /* L'animation de fond "Aurora" */
-        .hero-bg-animation {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150%; height: 150%;
-            background: radial-gradient(circle at center, var(--primary-glow) 0%, rgba(0,0,0,0) 50%);
-            opacity: 0.3;
-            filter: blur(80px);
-            animation: pulseAccent 10s infinite alternate;
-            z-index: -1;
-        }
-        @keyframes pulseAccent {
-            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.2; }
-            100% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.4; }
-        }
-
-        #accueil h1 {
-            font-size: 4.5rem; /* Très gros titre */
-            line-height: 1.1;
-            margin-bottom: 30px;
-            max-width: 900px;
-        }
-        #accueil p.lead {
-            font-size: 1.25rem;
-            color: var(--text-gray);
-            max-width: 650px;
-            margin-bottom: 50px;
-        }
-
-        /* --- CARDS "GLASSMORPHISM" (Services & Tarifs) --- */
-        .grid-3 {
+        /* --- 6. PRICING CARDS (STYLE PRÉCÉDENT RESTAURÉ) --- */
+        .pricing-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 30px;
         }
-
-        .glass-card {
-            background: var(--glass-bg);
-            border: var(--glass-border);
-            /* backdrop-filter: var(--glass-blur); NOTE: Désactivé sur les cards pour perf mobile, l'effet est simulé par le background */
-            padding: 50px 40px;
-            border-radius: var(--radius-lg);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Effet rebond au survol */
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* Effet de lueur au survol des cartes */
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 3px;
-            background: linear-gradient(to right, transparent, var(--primary-blue), transparent);
-            opacity: 0; transition: 0.4s;
-        }
-        .glass-card:hover {
-            transform: translateY(-10px);
-            border-color: rgba(37, 99, 235, 0.4);
-            box-shadow: 0 20px 40px -20px rgba(0,0,0,0.5);
-        }
-        .glass-card:hover::before { opacity: 1; }
-
-        .card-icon {
-            font-size: 3rem;
-            margin-bottom: 30px;
-            display: inline-block;
-            /* Dégradé sur l'icône */
-            background: linear-gradient(to bottom right, var(--text-white), var(--primary-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .glass-card h3 { font-size: 1.5rem; margin-bottom: 20px; }
-        .glass-card p { color: var(--text-gray); }
-
-        /* --- TARIFS PREMIUM --- */
-        #tarifs { background: var(--bg-secondary); } /* Fond alterné */
         
         .pricing-card {
-            display: flex; flex-direction: column;
-            text-align: left;
+            background: var(--bg-card); padding: 40px 30px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s;
+            display: flex; flex-direction: column; position: relative;
         }
-        .pricing-header { margin-bottom: 30px; }
-        .price-box { display: flex; align-items: baseline; margin: 20px 0; }
-        .price-currency { font-size: 1.5rem; font-weight: 600; }
-        .price-value { font-size: 4rem; font-weight: 800; line-height: 1; color: var(--text-white); }
-        .price-period { color: var(--text-gray); margin-left: 10px; }
+        .pricing-card:hover {
+            transform: translateY(-10px); border-color: var(--primary);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+        }
+        
+        .pricing-card h3 { font-size: 1.4rem; margin-bottom: 10px; }
+        .pricing-card .description { font-size: 0.9rem; min-height: 60px; margin-bottom: 20px; }
+        
+        .price { font-size: 2.2rem; font-weight: 700; color: white; margin-bottom: 5px; }
+        .price span { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+        .price-note { font-size: 0.8rem; color: var(--text-muted); font-style: italic; margin-bottom: 25px; display: block;}
 
-        .pricing-features li {
-            margin-bottom: 15px;
-            color: var(--text-gray);
-            display: flex; align-items: center;
-            font-weight: 500;
+        .pricing-card ul { margin-bottom: 30px; flex-grow: 1; text-align: left; }
+        .pricing-card li { 
+            margin-bottom: 12px; font-size: 0.9rem; color: #d1d5db; 
+            display: flex; align-items: start; 
         }
-        .pricing-features li i { 
-            color: var(--primary-blue); margin-right: 12px; font-size: 1.1rem;
-        }
-
-        /* Mise en avant de l'offre populaire */
-        .pricing-card.popular {
-            border-color: var(--primary-blue);
-            background: linear-gradient(to bottom right, rgba(37, 99, 235, 0.1), var(--glass-bg));
-            transform: scale(1.05); /* Un peu plus grande par défaut */
-            box-shadow: 0 0 40px -10px var(--primary-glow);
-            z-index: 2;
-        }
-        .pricing-card.popular:hover {
-            transform: scale(1.08) translateY(-10px);
-        }
-        .popular-badge {
-            position: absolute; top: -15px; right: 30px;
-            background: var(--primary-blue); color: white;
-            padding: 8px 16px; border-radius: 30px;
-            font-weight: 700; font-size: 0.8rem; letter-spacing: 1px;
-            box-shadow: 0 5px 15px -5px var(--primary-glow);
+        .pricing-card li i { color: var(--primary); margin-right: 10px; margin-top: 5px; font-size: 0.8rem; flex-shrink: 0; }
+        
+        /* Le badge "Bleu Pill" que vous aimiez */
+        .included-plan {
+            background: rgba(37,99,235,0.1); padding: 8px 12px; border-radius: 6px;
+            color: var(--primary); font-weight: 600; font-size: 0.85rem; margin-bottom: 15px;
+            display: inline-block;
         }
 
-        /* --- FAQ MODERNE --- */
-        .faq-container { max-width: 800px; margin: 0 auto; }
+        /* --- 7. FAQ --- */
         .faq-item {
-            background: var(--glass-bg); border: var(--glass-border);
-            margin-bottom: 20px; border-radius: var(--radius-md);
-            overflow: hidden; transition: 0.3s;
+            background: var(--bg-card); border: var(--border-light);
+            margin-bottom: 15px; border-radius: 12px; overflow: hidden; transition: 0.3s;
         }
-        .faq-item[open] { border-color: var(--primary-blue); }
-        .faq-summary {
-            padding: 25px;
-            font-weight: 700; font-size: 1.1rem;
-            cursor: pointer; list-style: none;
+        .faq-question {
+            padding: 25px; cursor: pointer; font-weight: 600; font-size: 1.1rem;
             display: flex; justify-content: space-between; align-items: center;
         }
-        .faq-summary::after {
-            content: '\f078'; font-family: 'Font Awesome 6 Free';
-            transition: 0.3s; color: var(--primary-blue);
+        .faq-answer {
+            padding: 0 25px 25px; color: var(--text-muted); display: none;
+            border-top: 1px solid rgba(255,255,255,0.03); padding-top: 20px;
         }
-        .faq-item[open] .faq-summary::after { transform: rotate(180deg); }
-        .faq-content {
-            padding: 0 25px 25px 25px;
-            color: var(--text-gray); line-height: 1.7;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
+        .faq-item.active { border-color: var(--primary); background: rgba(37,99,235,0.03); }
+        .faq-item.active .faq-answer { display: block; }
+        .faq-item i { transition: 0.3s; font-size: 0.9rem; color: var(--primary); }
+        .faq-item.active i { transform: rotate(180deg); }
+
+        /* --- 8. SECTION CONTACT (MODERNE/WOW) --- */
+        #contact {
+            background: radial-gradient(circle at 0% 100%, rgba(37, 99, 235, 0.1), transparent 40%),
+                        radial-gradient(circle at 100% 0%, rgba(37, 99, 235, 0.05), transparent 40%);
+        }
+        
+        .contact-container {
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px;
+            max-width: 1200px; margin: 0 auto;
+        }
+
+        /* Info Colonne Gauche */
+        .contact-details h3 { font-size: 2rem; margin-bottom: 20px; }
+        .contact-details p { font-size: 1.1rem; margin-bottom: 40px; }
+        
+        .info-box {
+            display: flex; align-items: flex-start; margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.02); padding: 20px; border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.05); transition: 0.3s;
+        }
+        .info-box:hover { background: rgba(255, 255, 255, 0.05); border-color: var(--primary); }
+        
+        .info-icon {
+            width: 50px; height: 50px; background: rgba(37, 99, 235, 0.2); color: var(--primary);
+            border-radius: 12px; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; margin-right: 20px; flex-shrink: 0;
+        }
+        .info-text h4 { font-size: 1.1rem; margin-bottom: 5px; color: white; }
+        .info-text a { color: var(--text-muted); font-size: 1rem; }
+        .info-text a:hover { color: var(--primary); }
+
+        /* Formulaire Colonne Droite */
+        .contact-form {
+            background: rgba(22, 24, 29, 0.6); /* Glass effect */
+            backdrop-filter: blur(10px);
+            padding: 50px; border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .form-group { margin-bottom: 25px; }
+        .form-label { display: block; font-size: 0.9rem; font-weight: 600; margin-bottom: 8px; color: #e2e8f0; }
+        
+        .form-input, .form-select, .form-textarea {
+            width: 100%; padding: 15px; border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white; font-family: 'Inter', sans-serif; font-size: 1rem;
+            transition: 0.3s;
+        }
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none; border-color: var(--primary); background: rgba(0, 0, 0, 0.4);
+            box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
         }
 
         /* --- FOOTER --- */
         footer {
-            background: var(--bg-secondary);
-            padding: 80px 6% 30px;
-            text-align: center;
-            border-top: var(--glass-border);
+            border-top: var(--border-light); padding: 50px 6% 30px; background: #08090c;
+            text-align: center; color: var(--text-muted); font-size: 0.9rem;
         }
-        .footer-logo img { height: 50px; opacity: 0.8; margin-bottom: 30px; }
-        .copyright { color: var(--text-gray); font-size: 0.9rem; margin-top: 50px; }
 
         /* --- RESPONSIVE --- */
         @media (max-width: 992px) {
-            #accueil h1 { font-size: 3rem; }
-            nav { display: none; } /* Menu burger à implémenter pour la prod */
-            .pricing-card.popular { transform: scale(1); }
-            section { padding: 80px 5%; }
+            #home h1 { font-size: 3rem; }
+            .pricing-grid { grid-template-columns: 1fr; }
+            .contact-container { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .contact-form { padding: 30px; }
         }
     </style>
 </head>
 <body>
 
-    <header data-aos="fade-down" data-aos-duration="800">
-        <a href="#accueil" class="logo">
-            <img src="image_0.png" alt="Boost Digital Blanc" class="logo-img">
+    <header data-aos="fade-down">
+        <a href="#" class="logo">
+            <img src="assets/Logo Boost Agency Left White.png" alt="BoostAgency Logo"> 
         </a>
         <nav>
             <ul>
-                <li><a href="#services">Expertise</a></li>
                 <li><a href="#tarifs">Offres</a></li>
                 <li><a href="#faq">FAQ</a></li>
-                <li><a href="#contact" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Démarrer</a></li>
+                <li><a href="#contact" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Contact</a></li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section id="accueil">
-            <div class="hero-bg-animation"></div>
-            
+    <section id="home">
+        <div>
+            <div class="hero-tag" data-aos="fade-down" data-aos-delay="100">✨ Votre partenaire digital de confiance</div>
             <h1 data-aos="fade-up" data-aos-delay="200">
-                Transformez vos visiteurs en <span class="text-gradient">clients fidèles.</span>
+                L'excellence digitale <br><span class="text-gradient">au service de votre croissance</span>
             </h1>
-            <p class="lead" data-aos="fade-up" data-aos-delay="400">
-                Nous créons des expériences digitales ultra-modernes qui allient design d'exception et performance commerciale pour propulser votre marque.
+            <p class="lead" data-aos="fade-up" data-aos-delay="300">
+                Nous concevons des sites web professionnels, rapides et optimisés pour convertir. <br>Laissez BoostAgency propulser votre activité.
             </p>
-            <div data-aos="fade-up" data-aos-delay="600" style="display: flex; gap: 20px; justify-content: center;">
-                <a href="#tarifs" class="btn btn-primary">
-                    Voir nos offres <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
-                </a>
+            <div data-aos="fade-up" data-aos-delay="400">
+                <a href="#contact" class="btn btn-primary">Démarrer mon projet</a>
+                <a href="#tarifs" class="btn btn-outline" style="width: auto; margin-left: 15px;">Voir les prix</a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="services">
-            <div class="section-header" data-aos="fade-up">
-                <h2 class="text-gradient">Notre Expertise</h2>
-                <p>Des solutions digitales taillées pour la croissance, sans compromis sur le design.</p>
+    <section id="tarifs">
+        <div class="section-header" data-aos="fade-up">
+            <div class="accent-line"></div>
+            <h2>Nos Formules <span class="text-gradient">Clés-en-main</span></h2>
+            <p>Choisissez l'offre adaptée à votre ambition. Transparence totale.</p>
+        </div>
+
+        <div class="pricing-grid">
+            <div class="pricing-card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Site Vitrine</h3>
+                <p class="description">Créez un site professionnel clé-en-main pour attirer et convertir vos visiteurs.</p>
+                <div class="price">595 €</div>
+                <span class="price-note">à partir de (Tarif indicatif)</span>
+                
+                <ul>
+                    <li><i class="fas fa-check"></i> 3–6 pages sur-mesure</li>
+                    <li><i class="fas fa-check"></i> SEO optimisé</li>
+                    <li><i class="fas fa-check"></i> Graphisme personnalisé</li>
+                    <li><i class="fas fa-check"></i> Design moderne adapté</li>
+                    <li><i class="fas fa-check"></i> Responsive sur tous supports</li>
+                    <li><i class="fas fa-check"></i> Page juridique incluse</li>
+                    <li><i class="fas fa-check"></i> Logo créé/refait</li>
+                    <li><i class="fas fa-check"></i> Support post-lancement</li>
+                    <li><i class="fas fa-check"></i> Livraison rapide</li>
+                </ul>
+                <a href="#contact" class="btn btn-outline">Réserver</a>
             </div>
+
+            <div class="pricing-card" data-aos="fade-up" data-aos-delay="200" style="border-color: var(--primary);">
+                <h3>Site Réservation</h3>
+                <p class="description">Simplifiez la gestion de vos RDV avec un système automatisé.</p>
+                <div class="price">895 €</div>
+                <span class="price-note">à partir de (Tarif indicatif)</span>
+                
+                <div class="included-plan"><i class="fas fa-plus-circle"></i> Inclus : Plan Site Vitrine</div>
+                
+                <ul>
+                    <li><i class="fas fa-check"></i> Système de réservation</li>
+                    <li><i class="fas fa-check"></i> Gestion des disponibilités</li>
+                    <li><i class="fas fa-check"></i> Notifications automatiques</li>
+                    <li><i class="fas fa-check"></i> Paiement en ligne sécurisé</li>
+                    <li><i class="fas fa-check"></i> Confirmation et rappels</li>
+                    <li><i class="fas fa-check"></i> Formulaires personnalisés</li>
+                    <li><i class="fas fa-check"></i> Support technique</li>
+                    <li><i class="fas fa-check"></i> Solution évolutive</li>
+                </ul>
+                <a href="#contact" class="btn btn-primary">Réserver</a>
+            </div>
+
+            <div class="pricing-card" data-aos="fade-up" data-aos-delay="300">
+                <h3>Site E-commerce</h3>
+                <p class="description">Lancez une boutique en ligne optimisée pour les ventes.</p>
+                <div class="price">895 €</div>
+                <span class="price-note">à partir de (Tarif indicatif)</span>
+                
+                <div class="included-plan"><i class="fas fa-plus-circle"></i> Inclus : Plan Site Vitrine</div>
+                
+                <ul>
+                    <li><i class="fas fa-check"></i> Paiement en ligne sécurisé</li>
+                    <li><i class="fas fa-check"></i> Catalogue de produits</li>
+                    <li><i class="fas fa-check"></i> Gestion des stocks</li>
+                    <li><i class="fas fa-check"></i> Fonctionnalités de livraison</li>
+                    <li><i class="fas fa-check"></i> Avis clients</li>
+                    <li><i class="fas fa-check"></i> Promotions et codes promo</li>
+                    <li><i class="fas fa-check"></i> SEO pour produits</li>
+                    <li><i class="fas fa-check"></i> Support technique</li>
+                </ul>
+                <a href="#contact" class="btn btn-outline">Réserver</a>
+            </div>
+
+            <div class="pricing-card" data-aos="fade-up" data-aos-delay="400">
+                <h3>Solution Complète</h3>
+                <p class="description">Offrez une expérience premium avec espace membre et automatisations.</p>
+                <div class="price">Sur Devis</div>
+                <span class="price-note">Projet sur-mesure</span>
+                
+                <div class="included-plan"><i class="fas fa-plus-circle"></i> Inclus : Plan Site Vitrine</div>
+                
+                <ul>
+                    <li><i class="fas fa-check"></i> Espace membre sécurisé</li>
+                    <li><i class="fas fa-check"></i> Automatisation avancée</li>
+                    <li><i class="fas fa-check"></i> Tableau de bord complet</li>
+                    <li><i class="fas fa-check"></i> Contenu premium protégé</li>
+                    <li><i class="fas fa-check"></i> Facturation et abonnements</li>
+                    <li><i class="fas fa-check"></i> Système de fidélisation</li>
+                    <li><i class="fas fa-check"></i> Support technique</li>
+                    <li><i class="fas fa-check"></i> Solution évolutive</li>
+                </ul>
+                <a href="#contact" class="btn btn-outline">Réserver</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq">
+        <div class="section-header" data-aos="fade-up">
+            <h2>Questions Fréquentes</h2>
+        </div>
+        
+        <div style="max-width: 900px; margin: 0 auto;">
+            <div class="faq-item">
+                <div class="faq-question">Combien coûte la création d'un site internet ? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Le coût varie selon la complexité. Un site vitrine simple démarre à 595€, tandis qu'un site E-commerce ou complexe coûtera plus cher. Nous fournissons toujours un devis précis avant de commencer.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Combien de temps faut-il pour créer un site ? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Un site vitrine standard prend entre 2 et 4 semaines. Un projet complexe peut demander 6 à 8 semaines. Tout dépend aussi de la rapidité avec laquelle nous recevons vos contenus !</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">Puis-je modifier mon site moi-même ? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Oui ! Nous utilisons des technologies modernes qui incluent une interface d'administration intuitive. Vous pourrez modifier vos textes, images et prix sans aucune connaissance en code.</div>
+            </div>
+             <div class="faq-item">
+                <div class="faq-question">Gérez-vous le nom de domaine et l'hébergement ? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Oui, nous offrons une assistance complète pour l'achat de votre nom de domaine et la configuration technique de l'hébergement. Votre site sera clé-en-main.</div>
+            </div>
+             <div class="faq-item">
+                <div class="faq-question">Le site sera-t-il visible sur Google (SEO) ? <i class="fas fa-chevron-down"></i></div>
+                <div class="faq-answer">Absolument. La structure de nos sites est optimisée pour le référencement naturel dès le départ (Vitesse, balises, mobile-friendly).</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="contact-container">
             
-            <div class="grid-3">
-                <div class="glass-card" data-aos="fade-up" data-aos-delay="100">
-                    <i class="fas fa-gem card-icon"></i>
-                    <h3>Design Premium</h3>
-                    <p>Des interfaces épurées, modernes et centrées sur l'utilisateur qui renforcent immédiatement votre crédibilité.</p>
-                </div>
-                <div class="glass-card" data-aos="fade-up" data-aos-delay="200">
-                    <i class="fas fa-bolt card-icon"></i>
-                    <h3>Ultra Performance</h3>
-                    <p>Des sites optimisés pour se charger en un éclair. Google adore ça, vos visiteurs aussi.</p>
-                </div>
-                <div class="glass-card" data-aos="fade-up" data-aos-delay="300">
-                    <i class="fas fa-chart-line card-icon"></i>
-                    <h3>Conversion Focus</h3>
-                    <p>Nous ne faisons pas que du "beau". Nous construisons des machines à générer des leads et des ventes.</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="tarifs">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Investissez dans votre <span class="highlight">Succès</span></h2>
-                <p>Des forfaits clairs. Des résultats concrets. Aucun frais caché.</p>
-            </div>
-            
-            <div class="grid-3" style="align-items: center;">
-                <div class="glass-card pricing-card" data-aos="fade-right" data-aos-delay="200">
-                    <div class="pricing-header">
-                        <h3>Starter</h3>
-                        <p class="text-gray">Pour une présence pro immédiate.</p>
+            <div class="contact-details" data-aos="fade-right">
+                <h3>Discutons de votre projet</h3>
+                <p>BoostAgency est là pour concrétiser vos idées. Devis gratuit, réponse sous 24h.</p>
+                
+                <div class="info-box">
+                    <div class="info-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="info-text">
+                        <h4>Email</h4>
+                        <a href="mailto:contact@boostagency.fr">contact@boostagency.fr</a>
                     </div>
-                    <div class="price-box">
-                        <span class="price-currency">€</span>
-                        <span class="price-value">1490</span>
-                        <span class="price-period">/HT</span>
+                </div>
+                
+                <div class="info-box">
+                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <div class="info-text">
+                        <h4>Téléphone</h4>
+                        <a href="tel:0652929875">06 52 92 98 75</a>
                     </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check-circle"></i> Site Vitrine (5 pages)</li>
-                        <li><i class="fas fa-check-circle"></i> Design Responsive Unique</li>
-                        <li><i class="fas fa-check-circle"></i> Optimisation SEO de base</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="background: var(--glass-border); width:100%; margin-top: 30px;">Choisir Starter</a>
                 </div>
 
-                <div class="glass-card pricing-card popular" data-aos="zoom-in">
-                    <div class="popular-badge">RECOMMANDÉ</div>
-                    <div class="pricing-header">
-                        <h3>Business Growth</h3>
-                        <p class="text-gray">L'outil complet pour PME ambitieuse.</p>
+                <div class="info-box">
+                    <div class="info-icon"><i class="fas fa-clock"></i></div>
+                    <div class="info-text">
+                        <h4>Disponibilité</h4>
+                        <span style="color:var(--text-muted)">Lundi - Vendredi : 9h00 - 19h00</span>
                     </div>
-                    <div class="price-box">
-                        <span class="price-currency">€</span>
-                        <span class="price-value">2990</span>
-                        <span class="price-period">/HT</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check-circle"></i> Tout du pack Starter</li>
-                        <li><i class="fas fa-check-circle"></i> Jusqu'à 15 pages + Blog</li>
-                        <li><i class="fas fa-check-circle"></i> SEO Avancé & Analytics</li>
-                        <li><i class="fas fa-check-circle"></i> Intégration CRM / Newsletter</li>
-                        <li class="highlight"><i class="fas fa-check-circle"></i> Formation Administration Inclus</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="width:100%; margin-top: 30px;">BOOSTER MON BUSINESS</a>
-                </div>
-
-                <div class="glass-card pricing-card" data-aos="fade-left" data-aos-delay="200">
-                    <div class="pricing-header">
-                        <h3>E-Commerce</h3>
-                        <p class="text-gray">Votre boutique ouverte 24/7.</p>
-                    </div>
-                    <div class="price-box">
-                        <span class="price-currency">Dès €</span>
-                        <span class="price-value">4500</span>
-                    </div>
-                    <ul class="pricing-features">
-                        <li><i class="fas fa-check-circle"></i> Boutique WooCommerce</li>
-                        <li><i class="fas fa-check-circle"></i> Paiements Sécurisés (Stripe)</li>
-                        <li><i class="fas fa-check-circle"></i> Gestion Stocks & Clients</li>
-                        <li><i class="fas fa-check-circle"></i> Outils Marketing Intégrés</li>
-                    </ul>
-                    <a href="#contact" class="btn btn-primary" style="background: var(--glass-border); width:100%; margin-top: 30px;">Devis E-Commerce</a>
                 </div>
             </div>
-        </section>
 
-        <section id="faq">
-            <div class="section-header" data-aos="fade-up">
-                <h2>Questions Fréquentes</h2>
+            <div class="contact-form" data-aos="fade-left">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label">Votre Nom</label>
+                        <input type="text" class="form-input" placeholder="Ex: Jean Dupont">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Votre Email</label>
+                        <input type="email" class="form-input" placeholder="Ex: jean@entreprise.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Type de projet</label>
+                        <select class="form-select">
+                            <option>Site Vitrine (dès 595€)</option>
+                            <option>Site E-Commerce (dès 895€)</option>
+                            <option>Site Réservation (dès 895€)</option>
+                            <option>Solution sur-mesure</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Message</label>
+                        <textarea class="form-textarea" rows="4" placeholder="Décrivez votre projet..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Envoyer ma demande <i class="fas fa-paper-plane" style="margin-left: 10px;"></i>
+                    </button>
+                    <p style="font-size: 0.8rem; margin-top: 15px; text-align: center; color: #64748b;">
+                        En cliquant, vous acceptez notre politique de confidentialité.
+                    </p>
+                </form>
             </div>
-            <div class="faq-container" data-aos="fade-up" data-aos-delay="200">
-                <details class="faq-item">
-                    <summary class="faq-summary">Quels sont vos délais de création ?</summary>
-                    <div class="faq-content">
-                        Pour un site vitrine "Business Growth", comptez entre 4 et 6 semaines. Nous privilégions la qualité à la précipitation, en incluant des phases de validation design et de tests.
-                    </div>
-                </details>
-                <details class="faq-item">
-                    <summary class="faq-summary">Suis-je propriétaire de mon site ?</summary>
-                    <div class="faq-content">
-                        <strong class="highlight">Absolument.</strong> Une fois le site payé, il vous appartient à 100%. Pas de location, pas de mauvaise surprise. Vous êtes libre.
-                    </div>
-                </details>
-                 <details class="faq-item">
-                    <summary class="faq-summary">Assurez-vous la maintenance ?</summary>
-                    <div class="faq-content">
-                        Oui. Nous proposons des contrats de maintenance mensuels optionnels pour garantir la sécurité, les mises à jour et les sauvegardes de votre outil de travail.
-                    </div>
-                </details>
-            </div>
-        </section>
-    </main>
+
+        </div>
+    </section>
 
     <footer>
-        <div class="footer-logo" data-aos="fade-up">
-            <img src="image_0.png" alt="Boost Digital Logo Blanc">
+        <div style="margin-bottom: 20px;">
+            <img src="assets/Logo Boost Agency Left White.png" alt="BoostAgency Logo" style="height: 30px; opacity: 0.8;">
         </div>
-        <div data-aos="fade-up" data-aos-delay="100">
-            <a href="#contact" class="btn btn-primary">Discuter de votre projet</a>
+        <p>&copy; 2024 BoostAgency. Tous droits réservés.</p>
+        <div style="margin-top: 20px;">
+            <a href="#" style="color: #64748b; margin: 0 10px;">Mentions Légales</a> • 
+            <a href="#" style="color: #64748b; margin: 0 10px;">CGV</a>
         </div>
-        <p class="copyright">© 2024 Boost Digital. Agence Web Nouvelle Génération.</p>
     </footer>
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Initialise la librairie d'animation au chargement
-        AOS.init({
-            once: true, /* L'animation ne se joue qu'une seule fois */
-            offset: 100, /* Déclenche l'animation 100px avant que l'élément soit visible */
-            easing: 'ease-out-cubic'
+        AOS.init({ duration: 800, once: true });
+
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            question.addEventListener('click', () => {
+                const isOpen = item.classList.contains('active');
+                faqItems.forEach(i => i.classList.remove('active'));
+                if (!isOpen) {
+                    item.classList.add('active');
+                }
+            });
         });
     </script>
-
 </body>
 </html>
