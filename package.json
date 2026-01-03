@@ -1,0 +1,26 @@
+{
+  "name": "myboostagency",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Edris-Y/MyBoostAgency.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Edris-Y/MyBoostAgency/issues"
+  },
+  "homepage": "https://github.com/Edris-Y/MyBoostAgency#readme",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "dotenv": "^17.2.3",
+    "node-fetch": "^2.7.0",
+    "slugify": "^1.6.6"
+  }
+}
