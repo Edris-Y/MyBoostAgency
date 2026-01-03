@@ -6,4 +6,10 @@
       <changefreq>weekly</changefreq>
       <priority>1.00</priority>
    </url>
-   </urlset>
+   
+   <url>
+      <loc>https://myboostagency.fr/blog/digitalisation-94-en-2026-le-guide-de-survie-et-de-croissance-pour-les-entreprises-du-val-de-marne.html</loc>
+      <lastmod>2026-01-03</lastmod>
+      <changefreq>monthly</changefreq>
+   </url>
+</urlset>

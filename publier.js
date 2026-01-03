@@ -1,17 +1,20 @@
-/* publier.js - Version Google Gemini + Images Unsplash */
+/* publier.js - Version FUTURE (Gemini 2.5 Pro + Unsplash) */
 require('dotenv').config();
 const fs = require('fs');
 const path = require('path');
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const slugify = require('slugify');
-const fetch = require('node-fetch'); // Pour parler à Unsplash et télécharger
+const fetch = require('node-fetch');
 
 // --- CONFIGURATION ---
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+
+// CHANGEMENT FINAL : On utilise le modèle disponible dans votre liste "gemini-2.5-pro"
 const model = genAI.getGenerativeModel({ 
-    model: "gemini-1.5-flash",
+    model: "gemini-2.5-pro",
     generationConfig: { responseMimeType: "application/json" }
 });
+
 const UNSPLASH_KEY = process.env.UNSPLASH_ACCESS_KEY;
 
 // --- FONCTION UTILITAIRE : TÉLÉCHARGER UNE IMAGE ---
@@ -30,15 +33,17 @@ if (!subject) {
     process.exit(1);
 }
 
-console.log(`🤖 Démarrage de la mission : "${subject}"...`);
+console.log(`🤖 Démarrage de la mission (Mode Gemini 2.5) : "${subject}"...`);
 
 async function generateArticle() {
     try {
-        // 1. Demander le texte ET le mot-clé d'image à Google Gemini
-        console.log("🧠 Google Gemini rédige l'article...");
+        console.log("🧠 Google Gemini 2.5 Pro rédige l'article...");
+        
         const prompt = `
         Tu es un expert SEO et Développeur Web Senior chez BoostAgency.
-        Rédige un article de blog long, expert et optimisé pour la conversion sur le sujet : "${subject}".
+        Rédige un article de blog long, très détaillé, expert et parfaitement optimisé pour la conversion sur le sujet : "${subject}".
+        
+        Ton ton doit être professionnel, convaincant et moderne.
         
         FORMAT DE SORTIE OBLIGATOIRE (JSON) :
         {
@@ -47,7 +52,7 @@ async function generateArticle() {
             "category": "Une catégorie courte (ex: Tech, Business, SEO)",
             "imageSearchKeyword": "Un mot-clé court EN ANGLAIS pour chercher une photo illustrative sur Unsplash (ex: 'laptop coding office')",
             "intro": "Une introduction percutante (2-3 phrases)",
-            "htmlContent": "Le corps de l'article en HTML pur (sans balises <html>, <head> ou <body>). Utilise uniquement <h2>, <p>, <ul>, <li>, <strong>. À la fin, inclus OBLIGATOIREMENT cette div exacte : <div class='cta-box'><h3>Un titre d'appel à l'action</h3><p>Une phrase courte pour convaincre</p><a href='../index.html#contact' class='btn btn-primary'>Texte du bouton</a></div>"
+            "htmlContent": "Le corps de l'article en HTML pur (sans balises <html>, <head> ou <body>). Utilise des <h2>, <p>, <ul>, <li>, <strong>. Fais des paragraphes clairs. À la fin, inclus OBLIGATOIREMENT cette div exacte : <div class='cta-box'><h3>Un titre d'appel à l'action</h3><p>Une phrase courte pour convaincre</p><a href='../index.html#contact' class='btn btn-primary'>Texte du bouton</a></div>"
         }`;
 
         const result = await model.generateContent(prompt);
@@ -63,27 +68,21 @@ async function generateArticle() {
         const unsplashData = await unsplashResponse.json();
         
         let imageHtml = '';
-        // Si on trouve une image
         if (unsplashData.results && unsplashData.results.length > 0) {
             const imageUrl = unsplashData.results[0].urls.regular;
-            // Créer le dossier assets/blog si inexistant
             const imgDir = path.join('assets', 'blog');
             if (!fs.existsSync(imgDir)) fs.mkdirSync(imgDir, { recursive: true });
             
             const imageName = slug + '.jpg';
             const localImagePath = path.join(imgDir, imageName);
             
-            // Télécharger l'image
             await downloadImage(imageUrl, localImagePath);
-            
-            // Préparer le HTML de l'image pour l'article (chemin relatif ../assets/blog/...)
             imageHtml = `<img src="../assets/blog/${imageName}" alt="${articleData.title}" style="width:100%; border-radius:24px; margin-bottom:40px; aspect-ratio: 16/9; object-fit: cover;">`;
         } else {
-             console.log("⚠️ Aucune image trouvée sur Unsplash, l'article sera sans image.");
+             console.log("⚠️ Aucune image trouvée ou erreur Unsplash.");
         }
 
-
-        // 3. Création du fichier HTML de l'article
+        // 3. Création du fichier HTML
         console.log("📄 Création du fichier HTML...");
         const htmlTemplate = `
 <!DOCTYPE html>
@@ -133,7 +132,7 @@ async function generateArticle() {
         fs.writeFileSync(path.join('blog', fileName), htmlTemplate);
 
         // 4. Injection dans blog.html
-        console.log("🔗 Mise à jour de la liste des articles...");
+        console.log("🔗 Mise à jour du blog...");
         let blogIndex = fs.readFileSync('blog.html', 'utf8');
         const newCard = `
             <article class="blog-card">
@@ -144,17 +143,14 @@ async function generateArticle() {
                 </div>
                 <div class="read-more">Lire l'article <i class="fas fa-arrow-right"></i></div>
                 <a href="blog/${fileName}" class="card-link-overlay"></a>
-            </article>
-        `;
+            </article>`;
         
         if (blogIndex.includes('<div class="blog-grid">')) {
              blogIndex = blogIndex.replace('<div class="blog-grid">', `<div class="blog-grid">\n${newCard}`);
              fs.writeFileSync('blog.html', blogIndex);
-        } else {
-            console.log("⚠️ Attention : <div class='blog-grid'> non trouvé dans blog.html.");
         }
 
-        // 5. Mise à jour Sitemap
+        // 5. Sitemap
         console.log("🗺️ Mise à jour du Sitemap...");
         let sitemap = fs.readFileSync('sitemap.xml', 'utf8');
         const sitemapEntry = `
@@ -166,14 +162,10 @@ async function generateArticle() {
         sitemap = sitemap.replace('</urlset>', `${sitemapEntry}\n</urlset>`);
         fs.writeFileSync('sitemap.xml', sitemap);
 
-        console.log(`\n🚀 MISSION ACCOMPLIE !`);
-        console.log(`👉 Article créé : blog/${fileName}`);
-        if(imageHtml) console.log(`👉 Image téléchargée dans : assets/blog/`);
-        console.log("\nPour publier, lancez :");
-        console.log("git add . && git commit -m 'Nouvel article avec image' && git push");
-
+        console.log(`\n🚀 SUCCÈS TOTAL ! Article créé avec Gemini 2.5 PRO : blog/${fileName}`);
+        
     } catch (error) {
-        console.error("🔥 ERREUR FATALE :", error);
+        console.error("🔥 ERREUR :", error);
     }
 }
 
